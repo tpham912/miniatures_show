@@ -85,13 +85,13 @@ function Detail() {
     <>
       {currentMiniature && cart ? (
         <div className="container my-1">
-          <Link to="/">← Back to Miniatures</Link>
+          <Link to="/gallery">← Back to Miniatures</Link>
 
           <h2>{currentMiniature.name}</h2>
 
           <p>{currentMiniature.description}</p>
 
-          <p>
+          {/* <p>
             <strong>Price:</strong>${currentMiniature.price}{' '}
             <button onClick={addToCart}>Add to Cart</button>
             <button
@@ -100,7 +100,7 @@ function Detail() {
             >
               Remove from Cart
             </button>
-          </p>
+          </p> */}
 
           <img
             src={`/images/${currentMiniature.image}`}
@@ -113,5 +113,5 @@ function Detail() {
     </>
   );
 }
-
+// add comments to this page
 export default Detail;

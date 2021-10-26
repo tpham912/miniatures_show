@@ -54,8 +54,8 @@ function MiniatureList() {
               _id={miniature._id}
               image={miniature.image}
               name={miniature.name}
-              price={miniature.price}
-              quantity={miniature.quantity}
+              // price={miniature.price}
+              // quantity={miniature.quantity}
             />
           ))}
         </div>

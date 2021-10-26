@@ -3,14 +3,14 @@ import MiniatureList from "../components/MiniatureList";
 import CategoryMenu from "../components/CategoryMenu";
 import Cart from "../components/Cart";
 
-const Home = () => {
+const Gallery = () => {
   return (
     <div className="container">
-      {/* <CategoryMenu />
+      <CategoryMenu />
       <MiniatureList />
-      <Cart /> */}
+      {/* <Cart /> */}
     </div>
   );
 };
 
-export default Home;
+export default Gallery;
