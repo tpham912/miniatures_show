@@ -18,38 +18,38 @@ function Detail() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
-  const [currentProduct, setCurrentProduct] = useState({});
+  const [currentMiniature, setCurrentMiniature] = useState({});
 
   const { loading, data } = useQuery(QUERY_MINIATURES);
 
-  const { products, cart } = state;
+  const { miniatures, cart } = state;
 
   useEffect(() => {
     // already in global store
-    if (products.length) {
-      setCurrentProduct(products.find((product) => product._id === id));
+    if (miniatures.length) {
+      setCurrentMiniature(miniatures.find((miniature) => miniature._id === id));
     }
     // retrieved from server
     else if (data) {
       dispatch({
         type: UPDATE_MINIATURES,
-        products: data.products,
+        miniatures: data.miniatures,
       });
 
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
+      data.miniatures.forEach((miniature) => {
+        idbPromise('miniatures', 'put', miniature);
       });
     }
     // get cache from idb
     else if (!loading) {
-      idbPromise('products', 'get').then((indexedProducts) => {
+      idbPromise('miniatures', 'get').then((indexedMiniatures) => {
         dispatch({
           type: UPDATE_MINIATURES,
-          products: indexedProducts,
+          miniatures: indexedMiniatures,
         });
       });
     }
-  }, [products, data, loading, dispatch, id]);
+  }, [miniatures, data, loading, dispatch, id]);
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
@@ -66,36 +66,36 @@ function Detail() {
     } else {
       dispatch({
         type: ADD_TO_CART,
-        product: { ...currentProduct, purchaseQuantity: 1 },
+        miniature: { ...currentMiniature, purchaseQuantity: 1 },
       });
-      idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+      idbPromise('cart', 'put', { ...currentMiniature, purchaseQuantity: 1 });
     }
   };
 
   const removeFromCart = () => {
     dispatch({
       type: REMOVE_FROM_CART,
-      _id: currentProduct._id,
+      _id: currentMiniature._id,
     });
 
-    idbPromise('cart', 'delete', { ...currentProduct });
+    idbPromise('cart', 'delete', { ...currentMiniature });
   };
 
   return (
     <>
-      {currentProduct && cart ? (
+      {currentMiniature && cart ? (
         <div className="container my-1">
-          <Link to="/">← Back to Products</Link>
+          <Link to="/">← Back to Miniatures</Link>
 
-          <h2>{currentProduct.name}</h2>
+          <h2>{currentMiniature.name}</h2>
 
-          <p>{currentProduct.description}</p>
+          <p>{currentMiniature.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentProduct.price}{' '}
+            <strong>Price:</strong>${currentMiniature.price}{' '}
             <button onClick={addToCart}>Add to Cart</button>
             <button
-              disabled={!cart.find((p) => p._id === currentProduct._id)}
+              disabled={!cart.find((p) => p._id === currentMiniature._id)}
               onClick={removeFromCart}
             >
               Remove from Cart
@@ -103,8 +103,8 @@ function Detail() {
           </p>
 
           <img
-            src={`/images/${currentProduct.image}`}
-            alt={currentProduct.name}
+            src={`/images/${currentMiniature.image}`}
+            alt={currentMiniature.name}
           />
         </div>
       ) : null}

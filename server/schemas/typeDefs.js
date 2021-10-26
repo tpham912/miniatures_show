@@ -30,13 +30,6 @@ const typeDefs = gql`
     orders: [Order]
   }
 
-  type Comment {
-    _id: ID
-    commentText: String
-    createdAt: String
-  }
-
-
   type Checkout {
     session: ID
   }
@@ -58,7 +51,6 @@ const typeDefs = gql`
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(miniatures: [ID]!): Order
-    addComment(thoughtId: ID!, commentText: String!): Thought
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateMiniature(_id: ID!, quantity: Int!): Miniature
     login(email: String!, password: String!): Auth
