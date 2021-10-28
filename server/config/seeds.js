@@ -131,21 +131,16 @@ db.once('open', async () => {
   await User.deleteMany();
 
   await User.create({
-    firstName: 'Pamela',
-    lastName: 'Washington',
-    email: 'pamela@testmail.com',
-    password: 'password12345',
-    orders: [
-      {
-        miniatures: [miniatures[0]._id, miniatures[0]._id, miniatures[1]._id]
-      }
-    ]
+    firstName: 'Micah',
+    lastName: 'Conn',
+    email: 'micah@conn.com',
+    password: 'password12345'
   });
 
   await User.create({
-    firstName: 'Elijah',
-    lastName: 'Holt',
-    email: 'eholt@testmail.com',
+    firstName: 'Liza',
+    lastName: 'McCown',
+    email: 'liza@mccown.com',
     password: 'password12345'
   });
 

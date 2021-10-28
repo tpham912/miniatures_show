@@ -24,6 +24,10 @@ export const ADD_ORDER = gql`
         category {
           name
         }
+        comments {
+        _id
+        commentText
+      }
       }
     }
   }
@@ -45,6 +49,27 @@ export const ADD_USER = gql`
       token
       user {
         _id
+      }
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($miniatureId: ID!, $commentText: String!) {
+    addComment(miniatureId: $miniatureId, commentText: $commentText) {
+      _id
+      name
+      description
+      price
+      quantity
+      image
+      category {
+        _id
+      }
+      comments {
+        _id
+        commentText
+        createdAt
       }
     }
   }

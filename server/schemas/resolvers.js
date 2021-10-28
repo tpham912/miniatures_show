@@ -120,6 +120,40 @@ const resolvers = {
 
       return await Miniature.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
+    addComment: async (parent, { miniatureId, commentText }, context) => {
+      if (context.user) {
+        return Miniature.findOneAndUpdate(
+          { _id: miniatureId },
+          {
+            $addToSet: {
+              comments: { commentText, commentAuthor: context.user.firstName },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeComment: async (parent, { miniatureId, commentId }, context) => {
+      if (context.user) {
+        return Miniature.findOneAndUpdate(
+          { _id: miniatureId },
+          {
+            $pull: {
+              comments: {
+                _id: commentId,
+                commentAuthor: context.user.firstName,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

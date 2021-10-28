@@ -12,6 +12,12 @@ export const QUERY_MINIATURES = gql`
       category {
         _id
       }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
   }
 `;
@@ -34,6 +40,12 @@ export const QUERY_ALL_MINIATURES = gql`
       quantity
       category {
         name
+      }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
       }
     }
   }

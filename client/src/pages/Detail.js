@@ -14,6 +14,9 @@ import { QUERY_MINIATURES } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
 
+import CommentList from '../components/CommentList';
+import CommentForm from '../components/CommentForm';
+
 function Detail() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
@@ -109,9 +112,16 @@ function Detail() {
         </div>
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
-      <Cart />
+      {/* <Cart /> */}
+      <div className="my-5">
+        <CommentList comments={currentMiniature.comments} />
+      </div>
+      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+        <CommentForm miniatureId={currentMiniature._id} />
+      </div>
+
     </>
   );
 }
-// add comments to this page
+// add comments to this page from 22.1.18review solved client src pages singlethought
 export default Detail;

@@ -8,11 +8,11 @@ function Nav() {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex-row">
-          <li className="mx-1">
+          {/* <li className="mx-1">
             <Link to="/orderHistory">
               Order History
             </Link>
-          </li>
+          </li> */}
           <li className="mx-1">
             <Link to="/gallery">
               Gallery
@@ -53,7 +53,7 @@ function Nav() {
     <header className="flex-row px-1">
       <h1>
         <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
+          {/* <span role="img" aria-label="shopping bag">🛍️</span> */}
           -Rouge Tuber
         </Link>
       </h1>

@@ -14,6 +14,7 @@ const typeDefs = gql`
     quantity: Int
     price: Float
     category: Category
+    comments: [Comment]!
   }
 
   type Order {
@@ -28,10 +29,18 @@ const typeDefs = gql`
     lastName: String
     email: String
     orders: [Order]
+
   }
 
   type Checkout {
     session: ID
+  }
+
+  type Comment {
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
   }
 
   type Auth {
@@ -44,6 +53,8 @@ const typeDefs = gql`
     miniatures(category: ID, name: String): [Miniature]
     miniature(_id: ID!): Miniature
     user: User
+    comments(firstname: String): [Comment]
+    comment(miniatureId: ID!): Miniature
     order(_id: ID!): Order
     checkout(miniatures: [ID]!): Checkout
   }
@@ -52,6 +63,8 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(miniatures: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
+    addComment(miniatureId: ID!, commentText: String!): Miniature
+    removeComment(miniatureId: ID!, commentId: ID!): Miniature
     updateMiniature(_id: ID!, quantity: Int!): Miniature
     login(email: String!, password: String!): Auth
   }
